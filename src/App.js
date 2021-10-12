@@ -3,16 +3,24 @@ import {
     BrowserRouter as Router, 
     Route, 
     Switch,
+    NavLink,
+    Link,
+    Redirect
 } from 'react-router-dom';
 import Home from './Home.js';
 import Signup from './Signup.js';
 import Login from './Login.js';
 import Todos from './Todos.js';
-import { NavLink } from 'react-router-dom';
-
 import './App.css'
 
 export default class App extends Component {
+  state = {
+    token: ''
+  }
+  handleTokenChange = token => {
+    localStorage.setItem('TOKEN', token)
+    this.setState({token: token})
+  }
     render() {
         return (
             <div>
@@ -48,12 +56,12 @@ export default class App extends Component {
                         <Route 
                             path="/Signup" 
                             exact
-                            render={(routerProps) => <Signup {...routerProps} />} 
+                            render={(routerProps) => <Signup handleTokenChange={this.handleTokenChange} {...routerProps} />} 
                         />
                         <Route 
                             path="/Login" 
                             exact
-                            render={(routerProps) => <Login {...routerProps} />} 
+                            render={(routerProps) => <Login handleTokenChange={this.handleTokenChange} {...routerProps} />} 
                         />
                         <Route 
                           path="/Todos/:myId" 
