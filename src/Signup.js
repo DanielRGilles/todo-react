@@ -10,26 +10,24 @@ export default class Signup extends Component {
 
     handleSubmit = async e => {
         e.preventDefault();
-
-        const { token } = await signup(this.state.email, this.state.password);
-
+        const { email, password } = this.state;
+        const { token } = await signup(email, password);
+        
         this.props.handleTokenChange(token);
-
-        // this is the react router way of redirecting somebody
         this.props.history.push('/todos');
     }
     render() {
-        
+        const { email, password } = this.state;
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Email: 
-                        <input  value={this.state.email} onChange={(e) => this.setState({ email: e.target.value })} type='email'/>
+                        <input  value={email} onChange={(e) => this.setState({ email: e.target.value })} type='email'/>
                     </label>
                     <label>
                         Password: 
-                        <input value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })} />
+                        <input value={password} onChange={(e) => this.setState({ password: e.target.value })} />
                     </label>
                     <button>Sign Up</button>
                 </form>
