@@ -29,6 +29,7 @@ export default class App extends Component {
   this.setState({ token: '' })
 }
     render() {
+      const { token } = this.state;
         return (
             <div>
                 <Router> 
@@ -53,7 +54,7 @@ export default class App extends Component {
               activeStyle={{fontSize:'1.5rem'}}
               to='/Todos'>Todos
               </NavLink>
-              {this.state.token && <button onClick={this.logout}>Logout</button>}
+              {token && <button onClick={this.logout}>Logout</button>}
             </header>
                     <Switch>
                         <Route 
@@ -74,8 +75,8 @@ export default class App extends Component {
                         <Route 
                           path="/Todos" 
                           exact
-                          render={(routerProps) => this.state.token
-                                  ? <Todos token={this.state.token} {...routerProps} />
+                          render={(routerProps) => token
+                                  ? <Todos token={token} {...routerProps} />
                                   : <Redirect to='/Signup' /> } 
                         />
                     </Switch>
