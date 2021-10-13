@@ -29,7 +29,7 @@ export async function login(email, password) {
     .post(`${URL}auth/signin`)
     .send({ email, password })
 
-    return response.body
+    return response.body.token
 }
 export async function signup(email, password) {
     const response = await request
