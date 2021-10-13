@@ -22,6 +22,7 @@ export default class Todos extends Component {
     }
     render() {
         const { todoItem, todos } = this.state;
+        const { token } = this.props;
         return (
             <div className='cnt'>
                 <form onSubmit={this.handleSubmit}>
@@ -34,15 +35,15 @@ export default class Todos extends Component {
                 <ul>
                     {todos
                     .sort((a, b) => a.completed - b.completed)
-                    .map(todoo => <li key={todoo.id} onClick={async() => {
+                    .map(({ todo, id, completed }) => <li key={id} onClick={async() => {
                         
-                            await updateTodos(todoo.id, !todoo.completed, this.props.token)
+                            await updateTodos(id, !completed, token)
                         
-                        const todos = await getTodos(this.props.token)
+                        const todos = await getTodos(token)
                         this.setState({ todos })
                     }}
-                    className={todoo.completed ? 'todo complete' : 'todo incomplete'}>
-                    {todoo.todo}
+                    className={completed ? 'todo complete' : 'todo incomplete'}>
+                    {todo}
                     </li>)}
                     
                 </ul>
