@@ -4,7 +4,6 @@ import {
     Route, 
     Switch,
     NavLink,
-    Link,
     Redirect
 } from 'react-router-dom';
 import Home from './Home.js';
@@ -18,15 +17,22 @@ const TOKEN_KEY = 'TOKEN'
 export default class App extends Component {
   state = {
     token: localStorage.getItem(TOKEN_KEY) || ''
-  }
+}
+
   handleTokenChange = token => {
     localStorage.setItem(TOKEN_KEY, token)
-    this.setState({token: token})
-  }
+    this.setState({ token: token })
+    console.log(token)
+}
+  logout = () => {
+  localStorage.clear()
+  this.setState({ token: '' })
+}
     render() {
         return (
             <div>
-              <header>
+                <Router> 
+                  <header>
               <NavLink
               exact className='links'
               activeStyle={{fontSize:'1.5rem'}}
@@ -47,8 +53,8 @@ export default class App extends Component {
               activeStyle={{fontSize:'1.5rem'}}
               to='/Todos'>Todos
               </NavLink>
+              {this.state.token && <button onClick={this.logout}>Logout</button>}
             </header>
-                <Router>
                     <Switch>
                         <Route 
                             path="/" 
@@ -63,7 +69,7 @@ export default class App extends Component {
                         <Route 
                             path="/login" 
                             exact
-                            render={(routerProps) => <Login handleTokenChange={this.handleTokenChange} {...routerProps} />} 
+                            render={(routerProps) => <Login {...routerProps} />} 
                         />
                         <Route 
                           path="/todos" 

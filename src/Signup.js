@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { signup } from './utils';
+import { signup } from './utils.js';
+import { Link } from 'react-router-dom';
 
 export default class Signup extends Component {
     state = {
@@ -8,26 +9,31 @@ export default class Signup extends Component {
     }
 
     handleSubmit = async e => {
-        e.prevent.default();
+        e.preventDefault();
 
         const { token } = await signup(this.state.email, this.state.password);
 
         this.props.handleTokenChange(token);
 
-        this.props.history.push('/todos')
+        // this is the react router way of redirecting somebody
+        this.props.history.push('/todos');
     }
     render() {
+        
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <label>
-                        Email <input type='email'value={this.state.email} onChange={(e) => this.setState({email: e.target.value})} />
+                        Email: 
+                        <input  value={this.state.email} onChange={(e) => this.setState({ email: e.target.value })} type='email'/>
                     </label>
                     <label>
-                        Password <input value={this.state.password} onChange={(e) => this.setState({password: e.target.value})}/>
+                        Password: 
+                        <input value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })} />
                     </label>
-                    <button>Submit</button>
+                    <button>Sign Up</button>
                 </form>
+                <Link to='/login'>Go to Login </Link>
             </div>
         )
     }
