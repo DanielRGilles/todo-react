@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { login } from './utils';
+import { login } from './utils.js';
+
 
 export default class Signup extends Component {
     state = {
@@ -10,10 +11,10 @@ export default class Signup extends Component {
     handleSubmit = async e => {
         e.prevent.default();
 
-        const { token } = await login(this.state.email, this.state.password);
-
-        this.props.handleTokenChange(token);
-
+        const token  = await login(this.state.email, this.state.password);
+        console.log(token)
+        this.props.handleTokenChange(token.token);
+        
         this.props.history.push('/todos')
     }
     render() {

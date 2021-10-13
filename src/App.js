@@ -22,7 +22,7 @@ export default class App extends Component {
   handleTokenChange = token => {
     localStorage.setItem(TOKEN_KEY, token)
     this.setState({ token: token })
-    console.log(token)
+    
 }
   logout = () => {
   localStorage.clear()
@@ -69,7 +69,7 @@ export default class App extends Component {
                         <Route 
                             path="/login" 
                             exact
-                            render={(routerProps) => <Login {...routerProps} />} 
+                            render={(routerProps) => <Login handleTokenChange={this.handleTokenChange} {...routerProps} />} 
                         />
                         <Route 
                           path="/todos" 
