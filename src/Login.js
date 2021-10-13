@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { login } from './utils.js';
 
 
-export default class Signup extends Component {
+export default class Login extends Component {
     state = {
         password: '',
         email: ''
@@ -13,7 +13,7 @@ export default class Signup extends Component {
 
         const token  = await login(this.state.email, this.state.password);
         console.log(token)
-        this.props.handleTokenChange(token.token);
+        this.props.handleTokenChange(token);
         
         this.props.history.push('/todos')
     }
