@@ -27,14 +27,14 @@ export async function createTodos(todo,  token) {
 export async function login(email, password) {
     const response = await request
     .post(`${URL}auth/signin`)
-    .send({ email, password })
+    .send({ email: email , password: password })
 
-    return response.body.token
+    return response
 }
 export async function signup(email, password) {
     const response = await request
     .post(`${URL}auth/signup`)
-    .send({ email, password })
+    .send({ email: email, password : password })
 
     return response.body
 }

@@ -12,15 +12,15 @@ import Login from './Login.js';
 import Todos from './Todos.js';
 import './App.css'
 
-const TOKEN_KEY = 'TOKEN'
+const TOKEN = 'TOKEN'
 
 export default class App extends Component {
   state = {
-    token: localStorage.getItem(TOKEN_KEY) || ''
+    token: localStorage.getItem(TOKEN) || ''
 }
 
-  handleTokenChange = token => {
-    localStorage.setItem(TOKEN_KEY, token)
+  handleTokenChange = async(token) => {
+    localStorage.setItem(TOKEN, token)
     this.setState({ token: token })
     
 }
@@ -62,21 +62,21 @@ export default class App extends Component {
                             render={(routerProps) => <Home {...routerProps} />} 
                         />
                         <Route 
-                            path="/signup" 
+                            path="/Signup" 
                             exact
                             render={(routerProps) => <Signup handleTokenChange={this.handleTokenChange} {...routerProps} />} 
                         />
                         <Route 
-                            path="/login" 
+                            path="/Login" 
                             exact
                             render={(routerProps) => <Login handleTokenChange={this.handleTokenChange} {...routerProps} />} 
                         />
                         <Route 
-                          path="/todos" 
+                          path="/Todos" 
                           exact
                           render={(routerProps) => this.state.token
                                   ? <Todos token={this.state.token} {...routerProps} />
-                                  : <Redirect to='/signup' /> } 
+                                  : <Redirect to='/Signup' /> } 
                         />
                     </Switch>
                 </Router>
